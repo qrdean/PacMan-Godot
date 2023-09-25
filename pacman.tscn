@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckf8wca1axagp"]
+
+[ext_resource type="Script" path="res://pacman.gd" id="1_0tdaf"]
+[ext_resource type="Texture2D" uid="uid://djfimojf0u7k1" path="res://assets/PacMan.png" id="1_ovjji"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_scjhv"]
+radius = 4.0
+height = 8.0
+
+[node name="Pacman" type="CharacterBody2D"]
+script = ExtResource("1_0tdaf")
+
+[node name="PacMan" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_ovjji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_scjhv")

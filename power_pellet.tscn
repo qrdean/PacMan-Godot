@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://drs21pi48slsx"]
+
+[ext_resource type="Texture2D" uid="uid://nafx3a82xfyq" path="res://assets/powerpelet.png" id="1_vfuhf"]
+
+[node name="PowerPellet" type="Node2D"]
+
+[node name="Powerpelet" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_vfuhf")
