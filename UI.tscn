@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://51cpc11445fq"]
+
+[ext_resource type="Script" path="res://UI.gd" id="1_65ofl"]
+[ext_resource type="Script" path="res://Container.gd" id="2_envyu"]
+[ext_resource type="Texture2D" uid="uid://djfimojf0u7k1" path="res://assets/PacMan.png" id="3_fmho1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3h7ky"]
+line_spacing = 2.08165e-12
+font_size = 8
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_65ofl")
+
+[node name="Score" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 11.0
+offset_bottom = 12.0
+text = "00"
+label_settings = SubResource("LabelSettings_3h7ky")
+
+[node name="LivesContainer" type="Container" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("2_envyu")
+
+[node name="Node2D" type="Node2D" parent="LivesContainer"]
+position = Vector2(15, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="LivesContainer/Node2D"]
+texture_filter = 1
+texture = ExtResource("3_fmho1")
+
+[node name="Node2D2" type="Node2D" parent="LivesContainer"]
+position = Vector2(32, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="LivesContainer/Node2D2"]
+texture_filter = 1
+texture = ExtResource("3_fmho1")

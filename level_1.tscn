@@ -1,28 +1,343 @@
-[gd_scene load_steps=9 format=3 uid="uid://ua2wi6ibawgt"]
+[gd_scene load_steps=87 format=3 uid="uid://ua2wi6ibawgt"]
 
+[ext_resource type="Script" path="res://level_1.gd" id="1_4rti3"]
 [ext_resource type="Texture2D" uid="uid://kv0a56vikkbl" path="res://assets/background.png" id="1_6m5uk"]
 [ext_resource type="Texture2D" uid="uid://uoaq6x2gwskc" path="res://assets/gameboard.png" id="1_drywu"]
 [ext_resource type="PackedScene" uid="uid://ckf8wca1axagp" path="res://pacman.tscn" id="2_jlkxp"]
+[ext_resource type="PackedScene" uid="uid://cqv3hb6nh0igj" path="res://pellet.tscn" id="4_3xweo"]
+[ext_resource type="PackedScene" uid="uid://51cpc11445fq" path="res://UI.tscn" id="4_8stsj"]
+[ext_resource type="PackedScene" uid="uid://bwj3ngn4cvwg1" path="res://red_ghost.tscn" id="5_f6jlc"]
+[ext_resource type="PackedScene" uid="uid://drs21pi48slsx" path="res://power_pellet.tscn" id="5_qqoou"]
+[ext_resource type="PackedScene" uid="uid://dg8x55kt7i2w6" path="res://blue_ghost.tscn" id="6_uvdts"]
+[ext_resource type="PackedScene" uid="uid://dt3spdjiac5fe" path="res://orange_ghost.tscn" id="7_u3mc7"]
+[ext_resource type="PackedScene" uid="uid://c8i812msksxkl" path="res://pink_ghost.tscn" id="8_wvn4w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upfcp"]
+size = Vector2(16, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sg30"]
+size = Vector2(16, 8)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_x3mu7"]
+vertices = PackedVector2Array(-1, -22, 0, -22, 0, 5, -1, 5)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1, -22, 0, -22, 0, 5, -1, 5)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lef3l"]
+size = Vector2(48, 25)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_skyxj"]
+vertices = PackedVector2Array(13, 37, 13, 92, 12, 92, 12, 37)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(12, 37, 12, 92, 13, 92, 13, 37)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_km3gi"]
+vertices = PackedVector2Array(12, 37, 12, 68, 11, 68, 11, 37)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 37, 11, 68, 12, 68, 12, 37)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_juyvl"]
+vertices = PackedVector2Array(12, 37, 12, 61, 11, 61, 11, 37)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 37, 11, 61, 12, 61, 12, 37)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_om07e"]
+vertices = PackedVector2Array(12, 41, 12, 65, 11, 65, 11, 41)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 41, 11, 65, 12, 65, 12, 41)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_koqhk"]
+vertices = PackedVector2Array(13, 29, 13, 76, 11, 76, 11, 29)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 29, 11, 76, 13, 76, 13, 29)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ke6u2"]
+vertices = PackedVector2Array(13, 29, 13, 76, 11, 76, 11, 29)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 29, 11, 76, 13, 76, 13, 29)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_v6qe8"]
+vertices = PackedVector2Array(12, 40, 12, 65, 11, 65, 11, 40)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 40, 11, 65, 12, 65, 12, 40)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_haay1"]
+vertices = PackedVector2Array(12, 36, 12, 59, 11, 59, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 59, 12, 59, 12, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yejmx"]
+vertices = PackedVector2Array(12, 36, 12, 59, 11, 59, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 59, 12, 59, 12, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_uj6ap"]
+vertices = PackedVector2Array(12, 36, 12, 62, 11, 62, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 62, 12, 62, 12, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_8o5x0"]
+vertices = PackedVector2Array(12, 36, 12, 59, 11, 59, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 59, 12, 59, 12, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vnpoy"]
+vertices = PackedVector2Array(12, 36, 12, 61, 11, 61, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 61, 12, 61, 12, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_slte2"]
+vertices = PackedVector2Array(12, 35, 12, 58, 11, 58, 11, 35)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 35, 11, 58, 12, 58, 12, 35)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_eelnt"]
+vertices = PackedVector2Array(12, 36, 12, 60, 11, 60, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 60, 12, 60, 12, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_evbwg"]
+vertices = PackedVector2Array(12, 36, 12, 59, 11, 59, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 59, 12, 59, 12, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ocjov"]
+vertices = PackedVector2Array(12, 38, 12, 62, 11, 62, 11, 38)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 38, 11, 62, 12, 62, 12, 38)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7o2n7"]
+vertices = PackedVector2Array(12, 37, 12, 61, 11, 61, 11, 37)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 37, 11, 61, 12, 61, 12, 37)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kcjs5"]
+vertices = PackedVector2Array(12, 36, 12, 59, 11, 59, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 59, 12, 59, 12, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pmbfy"]
+vertices = PackedVector2Array(12, 34, 12, 59, 11, 59, 11, 34)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 34, 11, 59, 12, 59, 12, 34)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_24h7n"]
+vertices = PackedVector2Array(12, 36, 12, 60, 11, 60, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 60, 12, 60, 12, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_huniu"]
+vertices = PackedVector2Array(12, 37, 12, 68, 11, 68, 11, 37)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 37, 11, 68, 12, 68, 12, 37)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_j0ylu"]
+vertices = PackedVector2Array(12, 37, 13, 208, 11, 208, 11, 37)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 37, 11, 208, 13, 208, 12, 37)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nqbjf"]
+vertices = PackedVector2Array(12, 37, 13, 204, 11, 204, 11, 37)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 37, 11, 204, 13, 204, 12, 37)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_q7yvw"]
+vertices = PackedVector2Array(12, 37, 12, 92, 11, 92, 11, 37)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 37, 11, 92, 12, 92, 12, 37)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wrip8"]
+vertices = PackedVector2Array(100, 35, 100, 37, 12, 37, 12, 35)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(12, 35, 12, 37, 100, 37, 100, 35)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4fgn3"]
+vertices = PackedVector2Array(51, 35, 51, 36, 12, 36, 12, 35)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(12, 35, 12, 36, 51, 36, 51, 35)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sv2md"]
+vertices = PackedVector2Array(44, 35, 44, 36, 4, 36, 4, 35)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(4, 35, 4, 36, 44, 36, 44, 35)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_522vt"]
+vertices = PackedVector2Array(203, 36, 203, 37, 3, 37, 3, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(3, 36, 3, 37, 203, 37, 203, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fpio7"]
+vertices = PackedVector2Array(100, 36, 100, 37, 11, 37, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 37, 100, 37, 100, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_m5ocl"]
+vertices = PackedVector2Array(85, 36, 85, 37, 11, 37, 11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(11, 36, 11, 37, 85, 37, 85, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jgglh"]
+vertices = PackedVector2Array(95, 36, 95, 37, 8, 37, 8, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(8, 36, 8, 37, 95, 37, 95, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_eh71y"]
+vertices = PackedVector2Array(94, 36, 94, 37, 7, 37, 7, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(7, 36, 7, 37, 94, 37, 94, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sipto"]
+vertices = PackedVector2Array(107, 36, 107, 37, -11, 37, -11, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-11, 36, -11, 37, 107, 37, 107, 36)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_k7yjs"]
+vertices = PackedVector2Array(76, 91, 99, 91, 99, 92, 76, 92)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(76, 91, 99, 91, 99, 92, 76, 92)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_cce1m"]
+vertices = PackedVector2Array(74, 138, 74, 139, 51, 139, 51, 138)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(51, 138, 51, 139, 74, 139, 74, 138)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0lgkn"]
+vertices = PackedVector2Array(74, 138, 74, 139, 50, 139, 50, 138)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(50, 138, 50, 139, 74, 139, 74, 138)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7vfu3"]
+vertices = PackedVector2Array(69, 138, 69, 139, 52, 139, 52, 138)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(52, 138, 52, 139, 69, 139, 69, 138)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_8c4vx"]
+vertices = PackedVector2Array(84, 138, 84, 139, 46, 139, 46, 138)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(46, 138, 46, 139, 84, 139, 84, 138)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ir31b"]
+vertices = PackedVector2Array(74, 138, 74, 139, 50, 139, 50, 138)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(50, 138, 50, 139, 74, 139, 74, 138)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qa1ll"]
+vertices = PackedVector2Array(67, 138, 67, 139, 50, 139, 50, 138)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(50, 138, 50, 139, 67, 139, 67, 138)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_tm3am"]
+vertices = PackedVector2Array(74, 138, 74, 139, 52, 139, 52, 138)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(52, 138, 52, 139, 74, 139, 74, 138)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2chr"]
 size = Vector2(220, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqc16"]
-size = Vector2(16, 104)
+size = Vector2(16, 103)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmjtc"]
-size = Vector2(9, 120)
+size = Vector2(9, 119)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_muwpe"]
-size = Vector2(40, 40)
+size = Vector2(39, 39)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_55m10"]
 size = Vector2(16, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h247g"]
+size = Vector2(30, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vm82x"]
+size = Vector2(38, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otsi2"]
+size = Vector2(30, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqvbf"]
+size = Vector2(16, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_210es"]
+size = Vector2(62, 15.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptjtt"]
+size = Vector2(14, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bfxr"]
+size = Vector2(14, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpkfs"]
+size = Vector2(26, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3yk8"]
+size = Vector2(14, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2e1vq"]
+size = Vector2(26, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gr5w2"]
+size = Vector2(14, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1rqf"]
+size = Vector2(38, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dc7rp"]
+size = Vector2(78, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jvke"]
+size = Vector2(14, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26xew"]
+size = Vector2(78, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30346"]
+size = Vector2(14, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bc2qu"]
+size = Vector2(14, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13awh"]
+size = Vector2(17, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vw43"]
+size = Vector2(14, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7eqr"]
+size = Vector2(16, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oy6ra"]
+size = Vector2(48, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_478uy"]
+size = Vector2(7, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yigvc"]
+size = Vector2(7, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0utw"]
+size = Vector2(15, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s0xcn"]
+size = Vector2(15, 7)
+
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_4rti3")
+
+[node name="SuperTimer" type="Timer" parent="."]
+wait_time = 7.0
+
+[node name="ScatterTimer" type="Timer" parent="."]
+wait_time = 7.0
+
+[node name="ChaseTimer" type="Timer" parent="."]
+wait_time = 20.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
 
 [node name="Background" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(112, 144)
 texture = ExtResource("1_6m5uk")
 
@@ -31,102 +346,1322 @@ texture_filter = 1
 position = Vector2(112, 144)
 texture = ExtResource("1_drywu")
 
+[node name="NavRight" type="Area2D" parent="."]
+position = Vector2(232, 139)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavRight"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_upfcp")
+
+[node name="Offset" type="Node2D" parent="NavRight"]
+position = Vector2(-12, 1)
+
+[node name="NavLeft" type="Area2D" parent="."]
+position = Vector2(-8, 139)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavLeft"]
+position = Vector2(-2.08165e-12, 1)
+shape = SubResource("RectangleShape2D_8sg30")
+
+[node name="Offset" type="Node2D" parent="NavLeft"]
+position = Vector2(12, 1)
+
+[node name="navtoghostpen" type="NavigationRegion2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(112, 139)
+navigation_polygon = SubResource("NavigationPolygon_x3mu7")
+
+[node name="UI" parent="." instance=ExtResource("4_8stsj")]
+
+[node name="GhostPenArea" type="Area2D" parent="."]
+position = Vector2(112, 140)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GhostPenArea"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_lef3l")
+
+[node name="BlueScatterLocation" type="Node2D" parent="."]
+position = Vector2(212, 277)
+
+[node name="OrangeScatterLocation" type="Node2D" parent="."]
+position = Vector2(12, 277)
+
+[node name="PinkScatterLocation" type="Node2D" parent="."]
+position = Vector2(12, 20)
+
+[node name="RedScatterLocation" type="Node2D" parent="."]
+position = Vector2(212, 20)
+
+[node name="GhostStartLocation" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(112, 117)
+
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="NavigationRegion2D3" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_skyxj")
+
+[node name="NavigationRegion2D4" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(40, 0)
+navigation_polygon = SubResource("NavigationPolygon_km3gi")
+
+[node name="NavigationRegion2D12" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(64, 32)
+navigation_polygon = SubResource("NavigationPolygon_juyvl")
+
+[node name="NavigationRegion2D17" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(88, 51)
+navigation_polygon = SubResource("NavigationPolygon_om07e")
+
+[node name="NavigationRegion2D21" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(64, 88)
+navigation_polygon = SubResource("NavigationPolygon_koqhk")
+
+[node name="NavigationRegion2D22" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(136, 88)
+navigation_polygon = SubResource("NavigationPolygon_ke6u2")
+
+[node name="NavigationRegion2D18" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(112, 51)
+navigation_polygon = SubResource("NavigationPolygon_v6qe8")
+
+[node name="NavigationRegion2D13" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(136, 33)
+navigation_polygon = SubResource("NavigationPolygon_haay1")
+
+[node name="NavigationRegion2D27" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(112, 152)
+navigation_polygon = SubResource("NavigationPolygon_yejmx")
+
+[node name="NavigationRegion2D40" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(137, 126)
+navigation_polygon = SubResource("NavigationPolygon_uj6ap")
+
+[node name="NavigationRegion2D37" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(89, 152)
+navigation_polygon = SubResource("NavigationPolygon_8o5x0")
+
+[node name="NavigationRegion2D39" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(64, 127)
+navigation_polygon = SubResource("NavigationPolygon_vnpoy")
+
+[node name="NavigationRegion2D28" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(200, 152)
+navigation_polygon = SubResource("NavigationPolygon_yejmx")
+
+[node name="NavigationRegion2D29" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(184, 177)
+navigation_polygon = SubResource("NavigationPolygon_slte2")
+
+[node name="NavigationRegion2D31" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(137, 176)
+navigation_polygon = SubResource("NavigationPolygon_eelnt")
+
+[node name="NavigationRegion2D32" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(65, 176)
+navigation_polygon = SubResource("NavigationPolygon_evbwg")
+
+[node name="NavigationRegion2D35" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(89, 197)
+navigation_polygon = SubResource("NavigationPolygon_ocjov")
+
+[node name="NavigationRegion2D36" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(112, 198)
+navigation_polygon = SubResource("NavigationPolygon_7o2n7")
+
+[node name="NavigationRegion2D33" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(17, 176)
+navigation_polygon = SubResource("NavigationPolygon_evbwg")
+
+[node name="NavigationRegion2D38" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(1, 152)
+navigation_polygon = SubResource("NavigationPolygon_kcjs5")
+
+[node name="NavigationRegion2D34" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(1, 201)
+navigation_polygon = SubResource("NavigationPolygon_pmbfy")
+
+[node name="NavigationRegion2D30" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(200, 199)
+navigation_polygon = SubResource("NavigationPolygon_24h7n")
+
+[node name="NavigationRegion2D5" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(160, 0)
+navigation_polygon = SubResource("NavigationPolygon_huniu")
+
+[node name="NavigationRegion2D15" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(160, 28)
+navigation_polygon = SubResource("NavigationPolygon_j0ylu")
+
+[node name="NavigationRegion2D16" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(40, 32)
+navigation_polygon = SubResource("NavigationPolygon_nqbjf")
+
+[node name="NavigationRegion2D9" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(112, 0)
+navigation_polygon = SubResource("NavigationPolygon_huniu")
+
+[node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(88, 0)
+navigation_polygon = SubResource("NavigationPolygon_huniu")
+
+[node name="NavigationRegion2D6" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(200, 0)
+navigation_polygon = SubResource("NavigationPolygon_q7yvw")
+
+[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_wrip8")
+
+[node name="NavigationRegion2D11" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(0, 57)
+navigation_polygon = SubResource("NavigationPolygon_4fgn3")
+
+[node name="NavigationRegion2D14" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(168, 57)
+navigation_polygon = SubResource("NavigationPolygon_sv2md")
+
+[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(9, 32)
+navigation_polygon = SubResource("NavigationPolygon_522vt")
+
+[node name="NavigationRegion2D24" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(10, 223)
+navigation_polygon = SubResource("NavigationPolygon_522vt")
+
+[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(112, 0)
+navigation_polygon = SubResource("NavigationPolygon_fpio7")
+
+[node name="NavigationRegion2D19" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(64, 80)
+navigation_polygon = SubResource("NavigationPolygon_m5ocl")
+
+[node name="NavigationRegion2D20" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(64, 128)
+navigation_polygon = SubResource("NavigationPolygon_m5ocl")
+
+[node name="NavigationRegion2D25" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(5, 152)
+navigation_polygon = SubResource("NavigationPolygon_jgglh")
+
+[node name="NavigationRegion2D26" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(117, 152)
+navigation_polygon = SubResource("NavigationPolygon_eh71y")
+
+[node name="NavigationRegion2D41" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(64, 175)
+navigation_polygon = SubResource("NavigationPolygon_sipto")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(0, 1)
+navigation_polygon = SubResource("NavigationPolygon_k7yjs")
+
+[node name="NavigationRegion2D23" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(48, 0)
+navigation_polygon = SubResource("NavigationPolygon_k7yjs")
+
+[node name="NavigationRegion2D42" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(1, 1)
+navigation_polygon = SubResource("NavigationPolygon_cce1m")
+
+[node name="NavigationRegion2D44" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(26, 97)
+navigation_polygon = SubResource("NavigationPolygon_0lgkn")
+
+[node name="NavigationRegion2D48" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(-40, 73)
+navigation_polygon = SubResource("NavigationPolygon_7vfu3")
+
+[node name="NavigationRegion2D46" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(-33, 97)
+navigation_polygon = SubResource("NavigationPolygon_8c4vx")
+
+[node name="NavigationRegion2D47" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(127, 97)
+navigation_polygon = SubResource("NavigationPolygon_8c4vx")
+
+[node name="NavigationRegion2D45" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(74, 97)
+navigation_polygon = SubResource("NavigationPolygon_ir31b")
+
+[node name="NavigationRegion2D49" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(145, 73)
+navigation_polygon = SubResource("NavigationPolygon_qa1ll")
+
+[node name="NavigationRegion2D43" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(97, 2)
+navigation_polygon = SubResource("NavigationPolygon_tm3am")
+
 [node name="Pacman" parent="." instance=ExtResource("2_jlkxp")]
-visible = false
+unique_name_in_owner = true
 position = Vector2(112, 212)
 
-[node name="Collsions" type="Node2D" parent="."]
+[node name="RedGhost" parent="." instance=ExtResource("5_f6jlc")]
+unique_name_in_owner = true
+position = Vector2(112, 117)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Collsions"]
+[node name="BlueGhost" parent="." instance=ExtResource("6_uvdts")]
+unique_name_in_owner = true
+position = Vector2(96, 141)
+ghost_type = "blue"
+
+[node name="OrangeGhost" parent="." instance=ExtResource("7_u3mc7")]
+unique_name_in_owner = true
+position = Vector2(112, 141)
+ghost_type = "orange"
+
+[node name="PinkGhost" parent="." instance=ExtResource("8_wvn4w")]
+unique_name_in_owner = true
+position = Vector2(128, 141)
+ghost_type = "pink"
+
+[node name="Outer Collisions" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(5, 27)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D"]
 position = Vector2(105, 1.25)
 shape = SubResource("RectangleShape2D_b2chr")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D2" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(8, 267)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D2"]
 position = Vector2(105, 1)
 shape = SubResource("RectangleShape2D_b2chr")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D3" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(2, 63)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D3"]
 position = Vector2(-2, 21)
 shape = SubResource("RectangleShape2D_aqc16")
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D4" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(226, 63)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D4"]
-position = Vector2(-2, 21)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D4"]
+position = Vector2(-2, 20.5)
 shape = SubResource("RectangleShape2D_aqc16")
 
-[node name="StaticBody2D5" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D5" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(0, 227)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D5"]
-position = Vector2(3.5, -23)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D5"]
+position = Vector2(3.5, -22.5)
 shape = SubResource("RectangleShape2D_tmjtc")
 
-[node name="StaticBody2D6" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D6" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(217, 227)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D6"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D6"]
 position = Vector2(3.5, -23)
 shape = SubResource("RectangleShape2D_tmjtc")
 
-[node name="StaticBody2D7" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D7" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(24, 116)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D7"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D7"]
 position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_muwpe")
 
-[node name="StaticBody2D9" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D9" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(192, 116)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D9"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D9"]
 position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_muwpe")
 
-[node name="StaticBody2D10" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D10" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(192, 164)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D10"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D10"]
 position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_muwpe")
 
-[node name="StaticBody2D8" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D8" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(24, 164)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D8"]
-position = Vector2(4, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D8"]
+position = Vector2(3.5, 0.5)
 shape = SubResource("RectangleShape2D_muwpe")
 
-[node name="StaticBody2D11" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D11" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(16, 224)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D11"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D11"]
 shape = SubResource("RectangleShape2D_55m10")
 
-[node name="StaticBody2D12" type="StaticBody2D" parent="Collsions"]
+[node name="StaticBody2D12" type="StaticBody2D" parent="Outer Collisions"]
 position = Vector2(208, 224)
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collsions/StaticBody2D12"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer Collisions/StaticBody2D12"]
 shape = SubResource("RectangleShape2D_55m10")
+
+[node name="Inner Collisions" type="Node2D" parent="."]
+
+[node name="UpperLeft" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(32, 52)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/UpperLeft"]
+shape = SubResource("RectangleShape2D_h247g")
+
+[node name="UpperRight" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(192, 52)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/UpperRight"]
+shape = SubResource("RectangleShape2D_h247g")
+
+[node name="UpperLeftB" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(76, 52)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/UpperLeftB"]
+shape = SubResource("RectangleShape2D_vm82x")
+
+[node name="UpperRightB" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(148, 52)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/UpperRightB"]
+shape = SubResource("RectangleShape2D_vm82x")
+
+[node name="UpperLeftMid" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(32, 80)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/UpperLeftMid"]
+shape = SubResource("RectangleShape2D_otsi2")
+
+[node name="UpperRightMid2" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(192, 80)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/UpperRightMid2"]
+shape = SubResource("RectangleShape2D_otsi2")
+
+[node name="UpperMidTongue" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(112, 48)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/UpperMidTongue"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_uqvbf")
+
+[node name="TDown" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(112, 80)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/TDown"]
+shape = SubResource("RectangleShape2D_210es")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/TDown"]
+position = Vector2(0, 18)
+shape = SubResource("RectangleShape2D_ptjtt")
+
+[node name="TDown2" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(112, 176)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/TDown2"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_210es")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/TDown2"]
+position = Vector2(0, 18)
+shape = SubResource("RectangleShape2D_ptjtt")
+
+[node name="TDown3" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(112, 224)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/TDown3"]
+position = Vector2(0, -0.75)
+shape = SubResource("RectangleShape2D_210es")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/TDown3"]
+position = Vector2(0, 18)
+shape = SubResource("RectangleShape2D_ptjtt")
+
+[node name="TLeft" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(64, 104)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/TLeft"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_4bfxr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/TLeft"]
+position = Vector2(18, 0)
+shape = SubResource("RectangleShape2D_cpkfs")
+
+[node name="TRight" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(160, 104)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/TRight"]
+shape = SubResource("RectangleShape2D_b3yk8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/TRight"]
+position = Vector2(-18, 0)
+shape = SubResource("RectangleShape2D_2e1vq")
+
+[node name="LeftM" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(64, 164)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/LeftM"]
+shape = SubResource("RectangleShape2D_gr5w2")
+
+[node name="RightM" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(160, 164)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/RightM"]
+shape = SubResource("RectangleShape2D_gr5w2")
+
+[node name="LeftBottomS" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(76, 200)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/LeftBottomS"]
+shape = SubResource("RectangleShape2D_n1rqf")
+
+[node name="RightBottomS" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(148, 200)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/RightBottomS"]
+shape = SubResource("RectangleShape2D_n1rqf")
+
+[node name="LeftBottomT" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(64, 248)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/LeftBottomT"]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_dc7rp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/LeftBottomT"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_8jvke")
+
+[node name="RightBottomT" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(160, 248)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/RightBottomT"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_26xew")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/RightBottomT"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_30346")
+
+[node name="LeftBottomL" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(40, 211)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/LeftBottomL"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_bc2qu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/LeftBottomL"]
+position = Vector2(-13.5, -11.5)
+shape = SubResource("RectangleShape2D_13awh")
+
+[node name="RightBottomL" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(184, 216)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/RightBottomL"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_6vw43")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/RightBottomL"]
+position = Vector2(15, -16)
+shape = SubResource("RectangleShape2D_d7eqr")
+
+[node name="Pin" type="StaticBody2D" parent="Inner Collisions"]
+position = Vector2(112, 154)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner Collisions/Pin"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_oy6ra")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Inner Collisions/Pin"]
+position = Vector2(-27.5, -14)
+shape = SubResource("RectangleShape2D_478uy")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Inner Collisions/Pin"]
+position = Vector2(27.5, -14)
+shape = SubResource("RectangleShape2D_yigvc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Inner Collisions/Pin"]
+position = Vector2(16.5, -29.5)
+shape = SubResource("RectangleShape2D_p0utw")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Inner Collisions/Pin"]
+position = Vector2(-16.5, -29.5)
+shape = SubResource("RectangleShape2D_s0xcn")
+
+[node name="pellet" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 188)
+
+[node name="pellet2" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(60, 188)
+
+[node name="pellet3" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(44, 188)
+
+[node name="pellet4" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(36, 188)
+
+[node name="pellet5" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(28, 188)
+
+[node name="pellet6" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(20, 188)
+
+[node name="pellet7" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 188)
+
+[node name="pellet8" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 188)
+
+[node name="pellet9" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(92, 188)
+
+[node name="pellet10" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(84, 188)
+
+[node name="pellet11" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 188)
+
+[node name="pellet12" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(68, 188)
+
+[node name="pellet13" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(164, 188)
+
+[node name="pellet14" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 188)
+
+[node name="pellet15" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(156, 188)
+
+[node name="pellet16" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 188)
+
+[node name="pellet17" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(140, 188)
+
+[node name="pellet18" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(132, 188)
+
+[node name="pellet19" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 188)
+
+[node name="pellet20" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 188)
+
+[node name="pellet21" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(204, 188)
+
+[node name="pellet22" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(196, 188)
+
+[node name="pellet23" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(188, 188)
+
+[node name="pellet24" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(180, 188)
+
+[node name="pellet83" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 36)
+
+[node name="pellet84" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(60, 36)
+
+[node name="pellet85" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(44, 36)
+
+[node name="pellet86" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(36, 36)
+
+[node name="pellet87" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(28, 36)
+
+[node name="pellet88" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(20, 36)
+
+[node name="pellet89" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 36)
+
+[node name="pellet90" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 36)
+
+[node name="pellet91" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(92, 36)
+
+[node name="pellet92" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(84, 36)
+
+[node name="pellet93" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 36)
+
+[node name="pellet94" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(68, 36)
+
+[node name="pellet95" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(164, 36)
+
+[node name="pellet96" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 36)
+
+[node name="pellet97" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(156, 36)
+
+[node name="pellet98" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 36)
+
+[node name="pellet99" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(140, 36)
+
+[node name="pellet100" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(132, 36)
+
+[node name="pellet101" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 36)
+
+[node name="pellet102" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 36)
+
+[node name="pellet103" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(204, 36)
+
+[node name="pellet104" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(196, 36)
+
+[node name="pellet105" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(188, 36)
+
+[node name="pellet106" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(180, 36)
+
+[node name="pellet107" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 68)
+
+[node name="pellet108" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(60, 68)
+
+[node name="pellet109" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(44, 68)
+
+[node name="pellet110" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(36, 68)
+
+[node name="pellet111" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(28, 68)
+
+[node name="pellet112" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(20, 68)
+
+[node name="pellet113" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 68)
+
+[node name="pellet114" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 68)
+
+[node name="pellet131" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(108, 68)
+
+[node name="pellet132" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(116, 68)
+
+[node name="pellet115" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(92, 68)
+
+[node name="pellet133" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(84, 92)
+
+[node name="pellet134" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(92, 92)
+
+[node name="pellet135" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 92)
+
+[node name="pellet136" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 92)
+
+[node name="pellet145" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(180, 92)
+
+[node name="pellet146" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(188, 92)
+
+[node name="pellet147" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(196, 92)
+
+[node name="pellet149" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(204, 92)
+
+[node name="pellet150" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 92)
+
+[node name="pellet148" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 92)
+
+[node name="pellet141" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(20, 92)
+
+[node name="pellet142" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(28, 92)
+
+[node name="pellet143" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(36, 92)
+
+[node name="pellet181" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(44, 92)
+
+[node name="pellet182" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 92)
+
+[node name="pellet144" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 92)
+
+[node name="pellet137" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(132, 92)
+
+[node name="pellet138" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(140, 92)
+
+[node name="pellet139" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 92)
+
+[node name="pellet151" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 84)
+
+[node name="pellet152" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 76)
+
+[node name="pellet175" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 84)
+
+[node name="pellet176" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 76)
+
+[node name="pellet177" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 84)
+
+[node name="pellet178" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 76)
+
+[node name="pellet179" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 84)
+
+[node name="pellet180" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 76)
+
+[node name="pellet153" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 60)
+
+[node name="pellet154" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 52)
+
+[node name="pellet155" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 44)
+
+[node name="pellet156" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 60)
+
+[node name="pellet157" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 52)
+
+[node name="pellet158" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 44)
+
+[node name="pellet159" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 60)
+
+[node name="pellet160" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 52)
+
+[node name="pellet161" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 44)
+
+[node name="pellet183" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 100)
+
+[node name="pellet184" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 132)
+
+[node name="pellet185" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 156)
+
+[node name="pellet186" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 148)
+
+[node name="pellet187" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 140)
+
+[node name="pellet199" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 180)
+
+[node name="pellet200" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 172)
+
+[node name="pellet201" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 164)
+
+[node name="pellet202" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 180)
+
+[node name="pellet203" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 172)
+
+[node name="pellet205" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 204)
+
+[node name="pellet206" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 196)
+
+[node name="pellet207" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 204)
+
+[node name="pellet208" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 196)
+
+[node name="pellet209" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 204)
+
+[node name="pellet210" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 196)
+
+[node name="pellet211" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 204)
+
+[node name="pellet212" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 196)
+
+[node name="pellet213" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 204)
+
+[node name="pellet214" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 196)
+
+[node name="pellet215" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 252)
+
+[node name="pellet216" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 244)
+
+[node name="pellet217" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 252)
+
+[node name="pellet218" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 244)
+
+[node name="pellet219" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 252)
+
+[node name="pellet220" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 244)
+
+[node name="pellet221" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 252)
+
+[node name="pellet222" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 244)
+
+[node name="pellet223" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(196, 228)
+
+[node name="pellet224" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(196, 220)
+
+[node name="pellet225" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 228)
+
+[node name="pellet226" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 220)
+
+[node name="pellet227" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 228)
+
+[node name="pellet228" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 220)
+
+[node name="pellet229" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 228)
+
+[node name="pellet230" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 220)
+
+[node name="pellet231" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 228)
+
+[node name="pellet232" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 220)
+
+[node name="pellet233" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(28, 228)
+
+[node name="pellet234" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(28, 220)
+
+[node name="pellet204" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 164)
+
+[node name="pellet188" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 124)
+
+[node name="pellet189" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 116)
+
+[node name="pellet190" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 108)
+
+[node name="pellet191" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 100)
+
+[node name="pellet192" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 132)
+
+[node name="pellet193" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 156)
+
+[node name="pellet194" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 148)
+
+[node name="pellet195" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 140)
+
+[node name="pellet196" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 124)
+
+[node name="pellet197" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 116)
+
+[node name="pellet198" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 108)
+
+[node name="pellet162" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 60)
+
+[node name="pellet164" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 44)
+
+[node name="pellet165" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 60)
+
+[node name="pellet166" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 52)
+
+[node name="pellet167" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 44)
+
+[node name="pellet168" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 60)
+
+[node name="pellet170" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 44)
+
+[node name="pellet140" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 92)
+
+[node name="pellet116" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(84, 68)
+
+[node name="pellet117" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 68)
+
+[node name="pellet118" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(68, 68)
+
+[node name="pellet119" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(164, 68)
+
+[node name="pellet120" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 68)
+
+[node name="pellet171" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 76)
+
+[node name="pellet172" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 84)
+
+[node name="pellet173" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 76)
+
+[node name="pellet174" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 84)
+
+[node name="pellet121" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(156, 68)
+
+[node name="pellet122" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 68)
+
+[node name="pellet123" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(140, 68)
+
+[node name="pellet124" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(132, 68)
+
+[node name="pellet125" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 68)
+
+[node name="pellet126" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 68)
+
+[node name="pellet127" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(204, 68)
+
+[node name="pellet128" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(196, 68)
+
+[node name="pellet129" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(188, 68)
+
+[node name="pellet130" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(180, 68)
+
+[node name="pellet25" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 260)
+
+[node name="pellet26" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(60, 260)
+
+[node name="pellet27" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(44, 260)
+
+[node name="pellet28" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(36, 260)
+
+[node name="pellet29" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(28, 260)
+
+[node name="pellet30" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(20, 260)
+
+[node name="pellet31" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 260)
+
+[node name="pellet51" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 236)
+
+[node name="pellet52" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(44, 236)
+
+[node name="pellet53" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(36, 236)
+
+[node name="pellet54" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(28, 236)
+
+[node name="pellet55" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(20, 236)
+
+[node name="pellet56" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(12, 236)
+
+[node name="pellet57" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 236)
+
+[node name="pellet58" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(92, 236)
+
+[node name="pellet59" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(84, 236)
+
+[node name="pellet60" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 236)
+
+[node name="pellet61" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 236)
+
+[node name="pellet62" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(140, 236)
+
+[node name="pellet63" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(132, 236)
+
+[node name="pellet64" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 236)
+
+[node name="pellet65" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(196, 236)
+
+[node name="pellet66" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(188, 236)
+
+[node name="pellet69" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 236)
+
+[node name="pellet70" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(204, 236)
+
+[node name="pellet67" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(180, 236)
+
+[node name="pellet68" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 236)
+
+[node name="pellet71" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(156, 212)
+
+[node name="pellet72" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 212)
+
+[node name="pellet73" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 212)
+
+[node name="pellet74" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(164, 212)
+
+[node name="pellet238" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(196, 212)
+
+[node name="pellet241" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 204)
+
+[node name="pellet242" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 196)
+
+[node name="pellet240" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(204, 212)
+
+[node name="pellet75" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(140, 212)
+
+[node name="pellet76" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(132, 212)
+
+[node name="pellet243" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 212)
+
+[node name="pellet244" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 212)
+
+[node name="pellet77" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 212)
+
+[node name="pellet78" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(68, 212)
+
+[node name="pellet79" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(92, 212)
+
+[node name="pellet80" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(84, 212)
+
+[node name="pellet81" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(60, 212)
+
+[node name="pellet82" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(52, 212)
+
+[node name="pellet235" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(28, 212)
+
+[node name="pellet236" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(20, 212)
+
+[node name="pellet32" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(100, 260)
+
+[node name="pellet49" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(108, 260)
+
+[node name="pellet50" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(116, 260)
+
+[node name="pellet33" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(92, 260)
+
+[node name="pellet34" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(84, 260)
+
+[node name="pellet35" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(76, 260)
+
+[node name="pellet36" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(68, 260)
+
+[node name="pellet37" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(164, 260)
+
+[node name="pellet38" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(172, 260)
+
+[node name="pellet39" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(156, 260)
+
+[node name="pellet40" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(148, 260)
+
+[node name="pellet41" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(140, 260)
+
+[node name="pellet42" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(132, 260)
+
+[node name="pellet43" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(124, 260)
+
+[node name="pellet44" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(212, 260)
+
+[node name="pellet45" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(204, 260)
+
+[node name="pellet46" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(196, 260)
+
+[node name="pellet47" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(188, 260)
+
+[node name="pellet48" parent="." instance=ExtResource("4_3xweo")]
+position = Vector2(180, 260)
+
+[node name="PowerPellet" parent="." instance=ExtResource("5_qqoou")]
+position = Vector2(212, 52)
+
+[node name="PowerPellet2" parent="." instance=ExtResource("5_qqoou")]
+position = Vector2(12, 52)
+
+[node name="PowerPellet3" parent="." instance=ExtResource("5_qqoou")]
+position = Vector2(12, 212)
+
+[node name="PowerPellet4" parent="." instance=ExtResource("5_qqoou")]
+position = Vector2(212, 212)
+
+[connection signal="update_lives" from="." to="UI" method="_on_level_1_update_lives"]
+[connection signal="update_score" from="." to="UI" method="_on_level_1_update_score"]
+[connection signal="timeout" from="SuperTimer" to="." method="_on_super_timer_timeout"]
+[connection signal="timeout" from="ScatterTimer" to="." method="_on_scatter_timer_timeout"]
+[connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="NavRight" to="." method="_on_nav_right_body_entered"]
+[connection signal="body_entered" from="NavLeft" to="." method="_on_nav_left_body_entered"]
+[connection signal="body_entered" from="GhostPenArea" to="." method="_on_ghost_pen_area_body_entered"]
+[connection signal="move_after_reset" from="Pacman" to="." method="_on_pacman_move_after_reset"]

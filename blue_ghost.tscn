@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dg8x55kt7i2w6"]
+
+[ext_resource type="Script" path="res://ghost.gd" id="1_56dic"]
+[ext_resource type="Texture2D" uid="uid://1lxcugsp1f25" path="res://assets/blue_ghost.png" id="2_2aukt"]
+[ext_resource type="Texture2D" uid="uid://5bs7j6cqwmkv" path="res://assets/scared_ghost.png" id="3_wnp0t"]
+[ext_resource type="Texture2D" uid="uid://bw32172766p43" path="res://assets/ghost_eyes.png" id="4_3hr37"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hjvs4"]
+radius = 3.9
+
+[node name="Ghost" type="CharacterBody2D"]
+collision_layer = 4
+motion_mode = 1
+wall_min_slide_angle = 0.0174533
+script = ExtResource("1_56dic")
+ghost_type = "red"
+scatter_nav_array = [Vector2(212, 260), Vector2(124, 260), Vector2(148, 212), Vector2(196, 236)]
+
+[node name="NormalGhost" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_2aukt")
+
+[node name="ScaredGhost" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("3_wnp0t")
+
+[node name="GhostEyes" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("4_3hr37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hjvs4")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+unique_name_in_owner = true
+path_desired_distance = 10.0
+target_desired_distance = 2.0
+avoidance_enabled = true
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.270588, 1, 0.945098, 1)

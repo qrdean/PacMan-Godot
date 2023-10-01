@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckf8wca1axagp"]
+[gd_scene load_steps=5 format=3 uid="uid://ckf8wca1axagp"]
 
 [ext_resource type="Script" path="res://pacman.gd" id="1_0tdaf"]
 [ext_resource type="Texture2D" uid="uid://djfimojf0u7k1" path="res://assets/PacMan.png" id="1_ovjji"]
@@ -7,7 +7,14 @@
 radius = 4.0
 height = 8.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ypdav"]
+size = Vector2(6, 6)
+
 [node name="Pacman" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
+motion_mode = 1
+wall_min_slide_angle = 0.0174533
 script = ExtResource("1_0tdaf")
 
 [node name="PacMan" type="Sprite2D" parent="."]
@@ -16,3 +23,12 @@ texture = ExtResource("1_ovjji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_scjhv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ypdav")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
