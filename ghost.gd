@@ -5,7 +5,10 @@ class_name Ghost
 @export var ghost_starting_location: Vector2
 
 var SPEED = 60.0
-var state = PEN
+var state = PEN:
+	set(new_state):
+		state = new_state
+		_handle_state(state)
 
 @export var scatter_nav_array = []
 var scatter_nav_index = 0
@@ -50,41 +53,66 @@ func _physics_process(_delta):
 		
 		move_and_slide()
 
-func set_chase():
-	ghost_scared_sprite.visible = false
-	ghost_sprite.visible = true
-	ghost_eyes_sprite.visible = false 
-	state = CHASE
+func _handle_state(new_state):
+	print_debug(self.name + str(new_state))
+	match new_state:
+		CHASE:
+			ghost_scared_sprite.visible = false
+			ghost_sprite.visible = true
+			ghost_eyes_sprite.visible = false 
+		SCARED:
+			ghost_scared_sprite.visible = true
+			ghost_sprite.visible = false
+			ghost_eyes_sprite.visible = false 
+		SCATTER:
+			ghost_scared_sprite.visible = false
+			ghost_sprite.visible = true
+			ghost_eyes_sprite.visible = false 
+		EATEN:
+			ghost_sprite.visible = false
+			ghost_eyes_sprite.visible = true 
+			ghost_scared_sprite.visible = false
+		PEN:
+			ghost_scared_sprite.visible = false
+			ghost_sprite.visible = true
+			ghost_eyes_sprite.visible = false 
 
-func set_scared():
-	ghost_scared_sprite.visible = true
-	ghost_sprite.visible = false
-	ghost_eyes_sprite.visible = false 
-	state = SCARED
-
-func set_scatter():
-	ghost_scared_sprite.visible = false
-	ghost_sprite.visible = true
-	ghost_eyes_sprite.visible = false 
-	state = SCATTER
-
-func set_eaten():
-	ghost_scared_sprite.visible = false
-	ghost_sprite.visible = false
-	ghost_eyes_sprite.visible = true 
-	state = EATEN
-
-func set_pen():
-	ghost_scared_sprite.visible = false
-	ghost_sprite.visible = true
-	ghost_eyes_sprite.visible = false 
-	state = PEN
+# func set_chase():
+# 	ghost_scared_sprite.visible = false
+# 	ghost_sprite.visible = true
+# 	ghost_eyes_sprite.visible = false 
+# 	state = CHASE
+#
+# func set_scared():
+# 	ghost_scared_sprite.visible = true
+# 	ghost_sprite.visible = false
+# 	ghost_eyes_sprite.visible = false 
+# 	state = SCARED
+#
+# func set_scatter():
+# 	ghost_scared_sprite.visible = false
+# 	ghost_sprite.visible = true
+# 	ghost_eyes_sprite.visible = false 
+# 	state = SCATTER
+#
+# func set_eaten():
+# 	ghost_scared_sprite.visible = false
+# 	ghost_sprite.visible = false
+# 	ghost_eyes_sprite.visible = true 
+# 	state = EATEN
+#
+# func set_pen():
+# 	ghost_scared_sprite.visible = false
+# 	ghost_sprite.visible = true
+# 	ghost_eyes_sprite.visible = false 
+# 	state = PEN
 
 func reset(level_ghost_starting_pos):
+	state = PEN
 	velocity = Vector2.ZERO
 	global_position = level_ghost_starting_pos
+	nav_agent_2d.target_position = global_position
 	ghost_scared_sprite.visible = false
 	ghost_sprite.visible = true
 	ghost_eyes_sprite.visible = false 
-	state = PEN
 

@@ -1,7 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckf8wca1axagp"]
+[gd_scene load_steps=10 format=3 uid="uid://ckf8wca1axagp"]
 
 [ext_resource type="Script" path="res://pacman.gd" id="1_0tdaf"]
 [ext_resource type="Texture2D" uid="uid://djfimojf0u7k1" path="res://assets/PacMan.png" id="1_ovjji"]
+[ext_resource type="Texture2D" uid="uid://b6yrlu6ilqd0n" path="res://assets/PacMan-Sheet.png" id="3_j2qal"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnk3d"]
+atlas = ExtResource("3_j2qal")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_721es"]
+atlas = ExtResource("3_j2qal")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_712bg"]
+atlas = ExtResource("3_j2qal")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qrphs"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnk3d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_721es")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_712bg")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_scjhv"]
 radius = 4.0
@@ -17,7 +57,15 @@ motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_0tdaf")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_qrphs")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.971759
+
 [node name="PacMan" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 texture = ExtResource("1_ovjji")
 

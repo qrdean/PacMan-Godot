@@ -36,6 +36,8 @@ var pacman_starting_pos: Vector2
 @onready var chase_timer = $ChaseTimer
 @onready var scatter_timer = $ScatterTimer
 @onready var super_timer = $SuperTimer
+# TODO: remove me once we setup the scene
+@onready var mock_intro_timer = $MockIntro
 var timer_rounds = 0
 
 var ghosts = []
@@ -59,13 +61,14 @@ func _ready():
 			pellets_remaining += 1
 			child.power_pellet_eaten.connect(_power_pellet_eaten)
 	starting_pellets = pellets_remaining
-	scatter_timer.start()
+	mock_intro_timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
 func reset():
+	pacman.movement_enabled = false
 	red_ghost.reset(red_starting_pos)
 	pink_ghost.reset(pink_starting_pos)
 	blue_ghost.reset(blue_starting_pos)
@@ -73,6 +76,10 @@ func reset():
 	pacman.reset(pacman_starting_pos)
 	scatter_timer.stop()
 	chase_timer.stop()
+	$PinkResetTimer.stop()
+	$BlueResetTimer.stop()
+	$OrangeResetTimer.stop()
+	mock_intro_timer.start()
 	# reset timer
 	pass
 
@@ -144,8 +151,6 @@ func _pellet_eaten():
 	score += SCORE_PELLET
 	update_score.emit(score)
 	pellets_remaining -= 1
-	# var debug_text = "pellets eaten" + str(score)
-	# print_debug(debug_text)
 	if pellets_remaining == starting_pellets - 1:
 		scatter_timer.start()
 		red_ghost.state = current_global_state 
@@ -171,13 +176,12 @@ func _power_pellet_eaten():
 	update_score.emit(score)
 	pellets_remaining -= 1
 	pacman.set_super()
-	# var debug_text = "score " + str(score)
-	# print_debug(debug_text)
 
 	for ghost in ghosts:
 		if ghost.state == Ghost.PEN:
 			continue
-		ghost.set_scared()
+		# ghost.set_scared()
+		ghost.state = Ghost.SCARED
 
 	# nav_to_ghost_pen.enabled = true
 	ghost_check()
@@ -185,9 +189,7 @@ func _power_pellet_eaten():
 
 # player and ghost interactions
 func _player_eat_ghost(ghost):
-	var debug_text = "player ate: " + ghost.name
-	print_debug(debug_text)
-	ghost.set_eaten()
+	ghost.state = Ghost.EATEN 
 	ghost.set_pac_position(ghost_pen_location.global_position)
 
 func _ghost_eat_player():
@@ -255,16 +257,30 @@ func _on_nav_right_body_entered(body):
 func _on_pacman_move_after_reset():
 	scatter_timer.start()
 	if pellets_remaining <= starting_pellets - 1:
+		red_ghost.global_position = ghost_start_location.global_position
 		red_ghost.state = current_global_state
 
 	if pellets_remaining <= starting_pellets - 10:
-		pink_ghost.global_position = ghost_start_location.global_position
-		pink_ghost.state = current_global_state
+		$PinkResetTimer.start()
 		
 	if pellets_remaining <= starting_pellets - 30:
-		blue_ghost.global_position = ghost_start_location.global_position
-		blue_ghost.state = current_global_state 
+		$BlueResetTimer.start()
 
 	if pellets_remaining <= starting_pellets - 90:
-		orange_ghost.global_position = ghost_start_location.global_position
-		orange_ghost.state = current_global_state
+		$OrangeResetTimer.start()
+
+func _on_mock_intro_timeout():
+	pacman.movement_enabled = true
+	scatter_timer.start()
+
+func _on_pink_reset_timer_timeout():
+	pink_ghost.global_position = ghost_start_location.global_position
+	pink_ghost.state = current_global_state
+
+func _on_blue_reset_timer_timeout():
+	blue_ghost.global_position = ghost_start_location.global_position
+	blue_ghost.state = current_global_state 
+
+func _on_orange_reset_timer_timeout():
+	orange_ghost.global_position = ghost_start_location.global_position
+	orange_ghost.state = current_global_state

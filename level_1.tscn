@@ -324,8 +324,25 @@ size = Vector2(15, 7)
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_4rti3")
 
+[node name="MockIntro" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="PinkResetTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="BlueResetTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="OrangeResetTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
 [node name="SuperTimer" type="Timer" parent="."]
 wait_time = 7.0
+one_shot = true
 
 [node name="ScatterTimer" type="Timer" parent="."]
 wait_time = 7.0
@@ -1657,6 +1674,10 @@ position = Vector2(212, 212)
 
 [connection signal="update_lives" from="." to="UI" method="_on_level_1_update_lives"]
 [connection signal="update_score" from="." to="UI" method="_on_level_1_update_score"]
+[connection signal="timeout" from="MockIntro" to="." method="_on_mock_intro_timeout"]
+[connection signal="timeout" from="PinkResetTimer" to="." method="_on_pink_reset_timer_timeout"]
+[connection signal="timeout" from="BlueResetTimer" to="." method="_on_blue_reset_timer_timeout"]
+[connection signal="timeout" from="OrangeResetTimer" to="." method="_on_orange_reset_timer_timeout"]
 [connection signal="timeout" from="SuperTimer" to="." method="_on_super_timer_timeout"]
 [connection signal="timeout" from="ScatterTimer" to="." method="_on_scatter_timer_timeout"]
 [connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]
