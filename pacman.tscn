@@ -1,8 +1,49 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckf8wca1axagp"]
+[gd_scene load_steps=21 format=3 uid="uid://ckf8wca1axagp"]
 
 [ext_resource type="Script" path="res://pacman.gd" id="1_0tdaf"]
 [ext_resource type="Texture2D" uid="uid://djfimojf0u7k1" path="res://assets/PacMan.png" id="1_ovjji"]
+[ext_resource type="Texture2D" uid="uid://wqicn2xdlc25" path="res://assets/PacMan-die.png" id="2_70u8k"]
 [ext_resource type="Texture2D" uid="uid://b6yrlu6ilqd0n" path="res://assets/PacMan-Sheet.png" id="3_j2qal"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpc3a"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j4tq"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck1yg"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl1bt"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np7mx"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awplj"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8g0g"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nidml"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoake"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ljrt"]
+atlas = ExtResource("2_70u8k")
+region = Rect2(144, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nnk3d"]
 atlas = ExtResource("3_j2qal")
@@ -22,6 +63,41 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpc3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j4tq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck1yg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl1bt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_np7mx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awplj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8g0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nidml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoake")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ljrt")
+}],
+"loop": false,
+"name": &"die",
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -60,9 +136,10 @@ script = ExtResource("1_0tdaf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_qrphs")
-animation = &"idle"
+animation = &"die"
 autoplay = "idle"
-frame_progress = 0.971759
+frame = 4
+frame_progress = 0.494854
 
 [node name="PacMan" type="Sprite2D" parent="."]
 visible = false
@@ -79,4 +156,5 @@ collision_mask = 13
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_ypdav")
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

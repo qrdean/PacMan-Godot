@@ -1685,4 +1685,5 @@ position = Vector2(212, 212)
 [connection signal="body_entered" from="NavRight" to="." method="_on_nav_right_body_entered"]
 [connection signal="body_entered" from="NavLeft" to="." method="_on_nav_left_body_entered"]
 [connection signal="body_entered" from="GhostPenArea" to="." method="_on_ghost_pen_area_body_entered"]
+[connection signal="death_animation_finished" from="Pacman" to="." method="_on_pacman_death_animation_finished"]
 [connection signal="move_after_reset" from="Pacman" to="." method="_on_pacman_move_after_reset"]

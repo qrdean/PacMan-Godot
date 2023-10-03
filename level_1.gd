@@ -194,11 +194,8 @@ func _player_eat_ghost(ghost):
 
 func _ghost_eat_player():
 	lives -= 1
-	reset()
 	update_lives.emit()
-	if lives < 1:
-		print_debug("player loses")
-		print_debug("play lose message")
+	pacman.play_animation_die()
 
 func _on_ghost_pen_area_body_entered(body):
 	if body is Ghost:
@@ -284,3 +281,13 @@ func _on_blue_reset_timer_timeout():
 func _on_orange_reset_timer_timeout():
 	orange_ghost.global_position = ghost_start_location.global_position
 	orange_ghost.state = current_global_state
+
+
+func _on_pacman_death_animation_finished():
+	if lives < 1:
+		pacman.queue_free()
+		print_debug("player loses")
+		print_debug("play lose message")
+		get_tree().paused = true
+	else:
+		reset()
