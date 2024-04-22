@@ -7,6 +7,7 @@ var movement_enabled = false
 var death = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var area_2d: Area2D = $Area2D
 
 const SPEED = 100.0
 
@@ -19,9 +20,7 @@ enum {
 
 signal ghost_eat_player()
 signal player_eat_ghost(ghost)
-
 signal death_animation_finished()
-
 signal move_after_reset()
 
 func _physics_process(_delta):
@@ -71,6 +70,7 @@ func play_animation_idle():
 	
 func play_animation_die():
 	death = true
+	animated_sprite.rotation = 0
 	animated_sprite.play("die")
 
 func reset(level_starting_pos):
@@ -91,6 +91,5 @@ func _on_area_2d_body_entered(body):
 
 
 func _on_animated_sprite_2d_animation_finished():
-	print_debug(animated_sprite.animation)
 	if animated_sprite.animation == "die":
 		death_animation_finished.emit()

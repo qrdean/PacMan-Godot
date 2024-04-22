@@ -1,16 +1,26 @@
-[gd_scene load_steps=87 format=3 uid="uid://ua2wi6ibawgt"]
+[gd_scene load_steps=97 format=3 uid="uid://ua2wi6ibawgt"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_4rti3"]
 [ext_resource type="Texture2D" uid="uid://kv0a56vikkbl" path="res://assets/background.png" id="1_6m5uk"]
 [ext_resource type="Texture2D" uid="uid://uoaq6x2gwskc" path="res://assets/gameboard.png" id="1_drywu"]
+[ext_resource type="Script" path="res://SoundPlayer.gd" id="2_4arm8"]
+[ext_resource type="AudioStream" uid="uid://c456vpk7xmibn" path="res://sounds/munch_1.wav" id="2_eayh2"]
 [ext_resource type="PackedScene" uid="uid://ckf8wca1axagp" path="res://pacman.tscn" id="2_jlkxp"]
+[ext_resource type="AudioStream" uid="uid://dokhn8e0ic0ur" path="res://sounds/munch_2.wav" id="3_j7n23"]
 [ext_resource type="PackedScene" uid="uid://cqv3hb6nh0igj" path="res://pellet.tscn" id="4_3xweo"]
 [ext_resource type="PackedScene" uid="uid://51cpc11445fq" path="res://UI.tscn" id="4_8stsj"]
 [ext_resource type="PackedScene" uid="uid://bwj3ngn4cvwg1" path="res://red_ghost.tscn" id="5_f6jlc"]
 [ext_resource type="PackedScene" uid="uid://drs21pi48slsx" path="res://power_pellet.tscn" id="5_qqoou"]
+[ext_resource type="AudioStream" uid="uid://o7jgpgs6agxv" path="res://sounds/power_pellet.wav" id="5_wtxol"]
+[ext_resource type="AudioStream" uid="uid://bhnm36efbddb" path="res://sounds/death_1.wav" id="6_5ug2k"]
 [ext_resource type="PackedScene" uid="uid://dg8x55kt7i2w6" path="res://blue_ghost.tscn" id="6_uvdts"]
+[ext_resource type="AudioStream" uid="uid://sm6o60tn1q5m" path="res://sounds/death_2.wav" id="7_l5oxb"]
 [ext_resource type="PackedScene" uid="uid://dt3spdjiac5fe" path="res://orange_ghost.tscn" id="7_u3mc7"]
+[ext_resource type="AudioStream" uid="uid://dofrq0rgs6dq7" path="res://sounds/eat_ghost.wav" id="8_cp28a"]
 [ext_resource type="PackedScene" uid="uid://c8i812msksxkl" path="res://pink_ghost.tscn" id="8_wvn4w"]
+[ext_resource type="AudioStream" uid="uid://bb5vk5eu4juqp" path="res://sounds/game_start.wav" id="9_tajqm"]
+[ext_resource type="AudioStream" uid="uid://sbkvao8otr2a" path="res://sounds/retreating.wav" id="10_atpjh"]
+[ext_resource type="AudioStream" uid="uid://dtael2o0srdpb" path="res://sounds/siren_1.wav" id="11_m2na0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upfcp"]
 size = Vector2(16, 9)
@@ -323,6 +333,40 @@ size = Vector2(15, 7)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_4rti3")
+
+[node name="SoundPlayer" type="Node2D" parent="."]
+script = ExtResource("2_4arm8")
+
+[node name="munch1" type="AudioStreamPlayer" parent="SoundPlayer"]
+stream = ExtResource("2_eayh2")
+
+[node name="munch2" type="AudioStreamPlayer" parent="SoundPlayer"]
+stream = ExtResource("3_j7n23")
+
+[node name="power_pellet" type="AudioStreamPlayer" parent="SoundPlayer"]
+stream = ExtResource("5_wtxol")
+
+[node name="death_1" type="AudioStreamPlayer" parent="SoundPlayer"]
+stream = ExtResource("6_5ug2k")
+
+[node name="death_2" type="AudioStreamPlayer" parent="SoundPlayer"]
+stream = ExtResource("7_l5oxb")
+
+[node name="eat_ghost" type="AudioStreamPlayer" parent="SoundPlayer"]
+stream = ExtResource("8_cp28a")
+
+[node name="game_start" type="AudioStreamPlayer" parent="SoundPlayer"]
+stream = ExtResource("9_tajqm")
+
+[node name="retreating" type="AudioStreamPlayer" parent="SoundPlayer"]
+stream = ExtResource("10_atpjh")
+
+[node name="siren_1" type="AudioStreamPlayer" parent="SoundPlayer"]
+stream = ExtResource("11_m2na0")
+
+[node name="MockOutro" type="Timer" parent="."]
+process_mode = 3
+wait_time = 5.0
 
 [node name="MockIntro" type="Timer" parent="."]
 wait_time = 3.0
@@ -1674,6 +1718,8 @@ position = Vector2(212, 212)
 
 [connection signal="update_lives" from="." to="UI" method="_on_level_1_update_lives"]
 [connection signal="update_score" from="." to="UI" method="_on_level_1_update_score"]
+[connection signal="game_start_finished" from="SoundPlayer" to="." method="_on_sound_player_game_start_finished"]
+[connection signal="timeout" from="MockOutro" to="." method="_on_mock_outro_timeout"]
 [connection signal="timeout" from="MockIntro" to="." method="_on_mock_intro_timeout"]
 [connection signal="timeout" from="PinkResetTimer" to="." method="_on_pink_reset_timer_timeout"]
 [connection signal="timeout" from="BlueResetTimer" to="." method="_on_blue_reset_timer_timeout"]

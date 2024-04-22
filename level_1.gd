@@ -36,13 +36,16 @@ var pacman_starting_pos: Vector2
 @onready var chase_timer = $ChaseTimer
 @onready var scatter_timer = $ScatterTimer
 @onready var super_timer = $SuperTimer
-# TODO: remove me once we setup the scene
+
 @onready var mock_intro_timer = $MockIntro
+@onready var mock_outro_timer = $MockOutro
 var timer_rounds = 0
+
+@onready var sound_player: SoundPlayer = $SoundPlayer
+@onready var ui: UI = $UI
 
 var ghosts = []
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	var children = self.get_children()
 	ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost]
@@ -61,11 +64,7 @@ func _ready():
 			pellets_remaining += 1
 			child.power_pellet_eaten.connect(_power_pellet_eaten)
 	starting_pellets = pellets_remaining
-	mock_intro_timer.start()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+	sound_player.play_game_start()
 
 func reset():
 	pacman.movement_enabled = false
@@ -74,35 +73,18 @@ func reset():
 	blue_ghost.reset(blue_starting_pos)
 	orange_ghost.reset(orange_starting_pos)
 	pacman.reset(pacman_starting_pos)
+	# reset all the timers
 	scatter_timer.stop()
 	chase_timer.stop()
 	$PinkResetTimer.stop()
 	$BlueResetTimer.stop()
 	$OrangeResetTimer.stop()
+	ui.toggle_ready(true)
 	mock_intro_timer.start()
-	# reset timer
-	pass
-
-func play_intro():
-	# plays intro timer
-	pass
 
 # Ghost handling
 func _on_timer_timeout():
 	ghost_check()
-
-func debug_state(state):
-	match state:
-		Ghost.CHASE:
-			return "chase"
-		Ghost.SCATTER:
-			return "scatter"
-		Ghost.SCARED:
-			return "scared"
-		Ghost.EATEN:
-			return "eaten"
-		Ghost.PEN:
-			return "pen"
 
 func ghost_check():
 	for ghost in ghosts:
@@ -148,6 +130,7 @@ func orange_chase_logic():
 
 # Score keeping && pellet eating
 func _pellet_eaten():
+	sound_player.play_munch() 
 	score += SCORE_PELLET
 	update_score.emit(score)
 	pellets_remaining -= 1
@@ -167,9 +150,13 @@ func _pellet_eaten():
 		orange_ghost.global_position = ghost_start_location.global_position
 		orange_ghost.state = current_global_state 
 	if pellets_remaining == 0:
-		print_debug("You win")
+		ui.toggle_win(true)
+		get_tree().paused = true
+		mock_outro_timer.start()
 
 func _power_pellet_eaten():
+	sound_player.power_pellet_start()
+	sound_player.stop_siren()
 	scatter_timer.paused = true
 	chase_timer.paused = true
 	score += SCORE_PELLET * 2
@@ -180,26 +167,28 @@ func _power_pellet_eaten():
 	for ghost in ghosts:
 		if ghost.state == Ghost.PEN:
 			continue
-		# ghost.set_scared()
 		ghost.state = Ghost.SCARED
 
-	# nav_to_ghost_pen.enabled = true
 	ghost_check()
 	super_timer.start()
 
 # player and ghost interactions
 func _player_eat_ghost(ghost):
+	sound_player.play_eat_ghost()
+	sound_player.play_retreating()
 	ghost.state = Ghost.EATEN 
 	ghost.set_pac_position(ghost_pen_location.global_position)
 
 func _ghost_eat_player():
 	lives -= 1
 	update_lives.emit()
+	sound_player.play_death()
 	pacman.play_animation_die()
 
 func _on_ghost_pen_area_body_entered(body):
 	if body is Ghost:
 		if body.state == Ghost.EATEN:
+			sound_player.stop_retreating()
 			body.state = current_global_state
 
 # chase or scatter timers
@@ -234,6 +223,8 @@ func _on_chase_timer_timeout():
 
 func _on_super_timer_timeout():
 	super_timer.stop()
+	sound_player.power_pellet_stop()
+	sound_player.play_siren()
 	chase_timer.paused = false
 	scatter_timer.paused = false
 	pacman.set_normal()
@@ -267,8 +258,10 @@ func _on_pacman_move_after_reset():
 		$OrangeResetTimer.start()
 
 func _on_mock_intro_timeout():
+	ui.toggle_ready(false)
 	pacman.movement_enabled = true
 	scatter_timer.start()
+	sound_player.play_siren()
 
 func _on_pink_reset_timer_timeout():
 	pink_ghost.global_position = ghost_start_location.global_position
@@ -282,12 +275,22 @@ func _on_orange_reset_timer_timeout():
 	orange_ghost.global_position = ghost_start_location.global_position
 	orange_ghost.state = current_global_state
 
-
 func _on_pacman_death_animation_finished():
 	if lives < 1:
+		mock_outro_timer.start()
 		pacman.queue_free()
-		print_debug("player loses")
-		print_debug("play lose message")
+		ui.toggle_game_over(true)
 		get_tree().paused = true
 	else:
 		reset()
+
+func _on_mock_outro_timeout():
+	ui.toggle_win(false)
+	ui.toggle_game_over(false)
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+func _on_sound_player_game_start_finished():
+	pacman.movement_enabled = true
+	scatter_timer.start()
+	sound_player.play_siren()

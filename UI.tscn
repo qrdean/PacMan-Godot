@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://51cpc11445fq"]
+[gd_scene load_steps=8 format=3 uid="uid://51cpc11445fq"]
 
 [ext_resource type="Script" path="res://UI.gd" id="1_65ofl"]
 [ext_resource type="Script" path="res://Container.gd" id="2_envyu"]
@@ -7,6 +7,19 @@
 [sub_resource type="LabelSettings" id="LabelSettings_3h7ky"]
 line_spacing = 2.08165e-12
 font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_13ihv"]
+font_size = 9
+font_color = Color(1, 1, 0.203922, 1)
+outline_color = Color(0.960784, 0.996078, 0.588235, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fgpbg"]
+font_size = 9
+font_color = Color(1, 0.0784314, 0.360784, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2a8ts"]
+font_size = 9
+font_color = Color(1, 1, 0, 1)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_65ofl")
@@ -40,3 +53,30 @@ position = Vector2(32, 8)
 [node name="Sprite2D" type="Sprite2D" parent="LivesContainer/Node2D2"]
 texture_filter = 1
 texture = ExtResource("3_fmho1")
+
+[node name="Win" type="Label" parent="."]
+visible = false
+offset_left = 91.0
+offset_top = 156.0
+offset_right = 134.0
+offset_bottom = 179.0
+text = "You Win!"
+label_settings = SubResource("LabelSettings_13ihv")
+
+[node name="GameOver" type="Label" parent="."]
+visible = false
+offset_left = 88.0
+offset_top = 157.0
+offset_right = 137.0
+offset_bottom = 180.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_fgpbg")
+
+[node name="ReadyLabel" type="Label" parent="."]
+visible = false
+offset_left = 99.0
+offset_top = 156.0
+offset_right = 139.0
+offset_bottom = 179.0
+text = "Ready!"
+label_settings = SubResource("LabelSettings_2a8ts")

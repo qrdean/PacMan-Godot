@@ -54,7 +54,6 @@ func _physics_process(_delta):
 		move_and_slide()
 
 func _handle_state(new_state):
-	print_debug(self.name + str(new_state))
 	match new_state:
 		CHASE:
 			ghost_scared_sprite.visible = false
@@ -76,36 +75,6 @@ func _handle_state(new_state):
 			ghost_scared_sprite.visible = false
 			ghost_sprite.visible = true
 			ghost_eyes_sprite.visible = false 
-
-# func set_chase():
-# 	ghost_scared_sprite.visible = false
-# 	ghost_sprite.visible = true
-# 	ghost_eyes_sprite.visible = false 
-# 	state = CHASE
-#
-# func set_scared():
-# 	ghost_scared_sprite.visible = true
-# 	ghost_sprite.visible = false
-# 	ghost_eyes_sprite.visible = false 
-# 	state = SCARED
-#
-# func set_scatter():
-# 	ghost_scared_sprite.visible = false
-# 	ghost_sprite.visible = true
-# 	ghost_eyes_sprite.visible = false 
-# 	state = SCATTER
-#
-# func set_eaten():
-# 	ghost_scared_sprite.visible = false
-# 	ghost_sprite.visible = false
-# 	ghost_eyes_sprite.visible = true 
-# 	state = EATEN
-#
-# func set_pen():
-# 	ghost_scared_sprite.visible = false
-# 	ghost_sprite.visible = true
-# 	ghost_eyes_sprite.visible = false 
-# 	state = PEN
 
 func reset(level_ghost_starting_pos):
 	state = PEN
